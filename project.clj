@@ -1,4 +1,4 @@
-(defproject predominance "0.1.0"
+(defproject predominance "0.1.1"
   :description "Figures out the predominant colors in an image"
   :url "http://github.com/thiagotnunes/predominance"
   :license {:name "Eclipse Public License"
