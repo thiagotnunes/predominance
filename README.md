@@ -7,12 +7,12 @@ Figures out the predominant color in an image.
 Add this to your leiningen project.clj file:
 
 ```clojure
-[predominance "0.1.0"]
+[predominance "0.1.1"]
 ```
 
 Currently, the following functions are supported.
 
-```
+```clojure
 (:require
   [predominance.core :refer :all]
   [clojure.java.io   :as io])
