@@ -2,10 +2,12 @@
   (:require
    [midje.sweet       :refer :all]
    [predominance.core :refer :all]
-   [clojure.java.io   :as io]))
+   [clojure.java.io   :as io])
+  (:import
+   [java.awt Color]))
 
-(defn hex-string [color]
-  (subs (Integer/toHexString (.getRGB color)) 2))
+(fact "converts a color to hex code"
+      (hex-string (Color. -16777216)) => "000000")
 
 (facts "about finding predominant color on the whole image"
        (fact "finds black when the image is all black"

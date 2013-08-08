@@ -37,7 +37,7 @@
 (defn- ->Color [[rgb _]]
   (Color. rgb))
 
-(defn predominant-color [filename x-fn y-fn]
+(defn- predominant-color [filename x-fn y-fn]
   (let [image-reader (image-reader-from filename)
         image-data (image-data-from image-reader)
         color-count (count-colors image-data
@@ -48,6 +48,9 @@
          reverse
          first
          ->Color)))
+
+(defn hex-string [color]
+  (subs (Integer/toHexString (.getRGB color)) 2))
 
 (defn starting-pixels [from]
   (fn [_]
