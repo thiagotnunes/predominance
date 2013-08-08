@@ -23,10 +23,10 @@
      :width (.getWidth image)
      :height (.getHeight image)}))
 
-(defn- count-colors [{image :image width :width height :height} x]
+(defn- count-colors [{image :image width :width height :height} x y]
   (let [colors (atom {})]
     (doseq [i (range x width)
-            j (range height)]
+            j (range y height)]
       (let [rgb (.getRGB image i j)
             color-count (@colors rgb)]
         (if color-count
@@ -41,14 +41,20 @@
   (Color. rgb))
 
 (defn color
-  ([filename x]
-      (let [image-reader (image-reader-from filename)
-            image-data (image-data-from image-reader)
-            color-count (count-colors image-data x)]
-        (->> color-count
-             (sort-by second)
-             reverse
-             predominant-color
-             ->Color)))
+  ([filename x y]
+     (let [image-reader (image-reader-from filename)
+           image-data (image-data-from image-reader)
+           color-count (count-colors image-data x y)]
+       (->> color-count
+            (sort-by second)
+            reverse
+            predominant-color
+            ->Color)))
   ([filename]
-     (color filename 0)))
+     (color filename 0 0)))
+
+(defn color-from-x [filename x]
+  (color filename x 0))
+
+(defn color-from-y [filename y]
+  (color filename 0 y))
