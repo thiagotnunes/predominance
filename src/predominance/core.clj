@@ -34,27 +34,40 @@
           (swap! colors assoc rgb 1))))
     @colors))
 
-(defn- predominant-color [coll]
-  (first coll))
-
 (defn- ->Color [[rgb _]]
   (Color. rgb))
 
-(defn color
-  ([filename x y]
-     (let [image-reader (image-reader-from filename)
-           image-data (image-data-from image-reader)
-           color-count (count-colors image-data x y)]
-       (->> color-count
-            (sort-by second)
-            reverse
-            predominant-color
-            ->Color)))
-  ([filename]
-     (color filename 0 0)))
+(defn predominant-color [filename x-fn y-fn]
+  (let [image-reader (image-reader-from filename)
+        image-data (image-data-from image-reader)
+        color-count (count-colors image-data
+                                  (x-fn image-data)
+                                  (y-fn image-data))]
+    (->> color-count
+         (sort-by second)
+         reverse
+         first
+         ->Color)))
 
-(defn color-from-x [filename x]
-  (color filename x 0))
+(defn starting-pixels [from]
+  (fn [_]
+    from))
 
-(defn color-from-y [filename y]
-  (color filename 0 y))
+(defn trailing-pixels [from]
+  (fn [dim]
+    (- dim from)))
+
+(defn color [filename]
+  (predominant-color filename
+                     (starting-pixels 0)
+                     (starting-pixels 0)))
+
+(defn color-from-x [filename x-fn]
+  (predominant-color filename
+                     (fn [{width :width}] (x-fn width))
+                     (starting-pixels 0)))
+
+(defn color-from-y [filename y-fn]
+  (predominant-color filename
+                     (starting-pixels 0)
+                     (fn [{height :height}] (y-fn height))))

@@ -12,22 +12,28 @@ Add this to your leiningen project.clj file:
 
 Currently, the following functions are supported.
 
-```clojure
+```
 (:require
-  [predominance.core :as predominant]
+  [predominance.core :refer :all]
   [clojure.java.io   :as io])
   
 ; The whole image
-(predominant/color "/path/to/file.jpg") ; => <#java.awt.Color "#FFF">
+(color "/path/to/file.jpg") ; => <#java.awt.Color "#FFF">
 
 ; From a given x
-(predominant/color-from-x "/path/to/file.jpg" 300) ; => <#java.awt.Color "#EEE">
+; Starts at the position specified and goes up to the image's width
+(color-from-x "/path/to/file.jpg" (starting-pixels 10)) ; => <#java.awt.Color "#EEE">
+; Starts at the position (- width specified pixels) and goes up to the image's width
+(color-from-x "/path/to/file.jpg" (trailing-pixels 10)) ; => <#java.awt.Color "#EEE">
 
 ; From a given y
-(predominant/color-from-y "/path/to/file.jpg" 200) ; => <#java.awt.Color "#DDD">
+; Starts at the position specified and goes up to the image's height
+(color-from-y "/path/to/file.jpg" (starting-pixels 10)) ; => <#java.awt.Color "#EEE">
+; Starts at the position (- height specified pixels) and goes up to the image's height
+(color-from-y "/path/to/file.jpg" (trailing-pixels 10)) ; => <#java.awt.Color "#EEE">
 
 ; It also accepts files as input
-(predominant/color (as-file "/path/to/file.jpg")) ; => <#java.awt.Color "#FFF">
+(color (as-file "/path/to/file.jpg")) ; => <#java.awt.Color "#FFF">
 ```
 
 ## License
