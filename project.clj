@@ -7,8 +7,7 @@
   :dependencies [[org.clojure/clojure "1.5.1"]]
 
   :profiles {:production {:env {:production true}}
-             :dev {:dependencies [[midje "1.5.1"]
-                                  [stereotype "0.2.3"]]
-                   :plugins      [[lein-midje "2.0.4"]
+             :dev {:dependencies [[midje "1.5.1"]]
+                   :plugins      [[lein-midje "3.0.0"]
                                   [lein-kibit "0.0.8"]
                                   [lein-cloverage "1.0.2"]]}})
