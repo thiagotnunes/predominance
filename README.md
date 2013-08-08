@@ -4,9 +4,18 @@ Figures out the predominant color in an image.
 
 ## Usage
 
+Add this to your leiningen project.clj file:
+
+```clojure
+[predominance "0.1.0"]
+```
+
+Currently, the following functions are supported.
+
 ```clojure
 (:require
-  [predominance.core :as predominant])
+  [predominance.core :as predominant]
+  [clojure.java.io   :as io])
   
 ; The whole image
 (predominant/color "/path/to/file.jpg") ; => <#java.awt.Color "#FFF">
@@ -16,6 +25,9 @@ Figures out the predominant color in an image.
 
 ; From a given y
 (predominant/color-from-y "/path/to/file.jpg" 200) ; => <#java.awt.Color "#DDD">
+
+; It also accepts files as input
+(predominant/color (as-file "/path/to/file.jpg")) ; => <#java.awt.Color "#FFF">
 ```
 
 ## License
