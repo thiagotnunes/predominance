@@ -1,7 +1,8 @@
 (ns predominance.core
   (:require
    [clojure.java.io     :as io]
-   [slingshot.slingshot :refer [throw+]])
+   [slingshot.slingshot :refer [throw+]]
+   [clojure.string      :as string])
   (:import
    [java.awt.image BufferedImage]
    [java.awt Color]
@@ -50,7 +51,8 @@
          ->Color)))
 
 (defn hex-string [color]
-  (subs (Integer/toHexString (.getRGB color)) 2))
+  (str "#"
+       (-> color .getRGB Integer/toHexString (subs 2) string/upper-case)))
 
 (defn starting-pixels [from]
   (fn [_]
@@ -60,10 +62,15 @@
   (fn [dim]
     (- dim from)))
 
-(defn color [filename]
-  (predominant-color filename
-                     (starting-pixels 0)
-                     (starting-pixels 0)))
+(defn color
+  ([filename]
+     (color filename
+            (starting-pixels 0)
+            (starting-pixels 0)))
+  ([filename x-fn y-fn]
+     (predominant-color filename
+                        (fn [{width :width}] (x-fn width))
+                        (fn [{height :height}] (y-fn height)))))
 
 (defn color-from-x [filename x-fn]
   (predominant-color filename

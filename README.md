@@ -7,7 +7,7 @@ Figures out the predominant color in an image.
 Add this to your leiningen project.clj file:
 
 ```clojure
-[predominance "0.1.1"]
+[predominance "0.1.2"]
 ```
 
 Currently, the following functions are supported.
@@ -18,22 +18,26 @@ Currently, the following functions are supported.
   [clojure.java.io   :as io])
   
 ; The whole image
-(color "/path/to/file.jpg") ; => <#java.awt.Color "#FFF">
+(color "/path/to/file.jpg") ; => <#java.awt.Color>
 
 ; From a given x
 ; Starts at the position specified and goes up to the image's width
-(color-from-x "/path/to/file.jpg" (starting-pixels 10)) ; => <#java.awt.Color "#EEE">
-; Starts at the position (- width specified pixels) and goes up to the image's width
-(color-from-x "/path/to/file.jpg" (trailing-pixels 10)) ; => <#java.awt.Color "#EEE">
+(color-from-x "/path/to/file.jpg" (starting-pixels 10)) ; => <#java.awt.Color>
+; Starts at the position (- width trailing pixels) and goes up to the image's width
+(color-from-x "/path/to/file.jpg" (trailing-pixels 10)) ; => <#java.awt.Color>
 
 ; From a given y
 ; Starts at the position specified and goes up to the image's height
-(color-from-y "/path/to/file.jpg" (starting-pixels 10)) ; => <#java.awt.Color "#EEE">
-; Starts at the position (- height specified pixels) and goes up to the image's height
-(color-from-y "/path/to/file.jpg" (trailing-pixels 10)) ; => <#java.awt.Color "#EEE">
+(color-from-y "/path/to/file.jpg" (starting-pixels 10)) ; => <#java.awt.Color>
+; Starts at the position (- height trailing pixels) and goes up to the image's height
+(color-from-y "/path/to/file.jpg" (trailing-pixels 10)) ; => <#java.awt.Color>
+
+; From a given x and y
+(color "/path/to/file.jpg" (starting-pixels 0) (starting-pixels 10)) ; => <#java.awt.Color>
+(color "/path/to/file.jpg" (trailing-pixels 10) (trailing-pixels 10)) ; => <#java.awt.Color>
 
 ; It also accepts files as input
-(color (as-file "/path/to/file.jpg")) ; => <#java.awt.Color "#FFF">
+(color (as-file "/path/to/file.jpg")) ; => <#java.awt.Color>
 ```
 
 ## License
