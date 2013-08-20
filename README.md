@@ -1,5 +1,7 @@
 # Predominance
 
+[![Build Status](https://travis-ci.org/thiagotnunes/predominance.png)](https://travis-ci.org/thiagotnunes/predominance)
+
 Figures out the predominant color in an image.
 
 ## Usage
