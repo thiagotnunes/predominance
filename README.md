@@ -12,7 +12,7 @@ Add this to your leiningen project.clj file:
 
 Currently, the following functions are supported.
 
-```
+```clojure
 (:require
   [predominance.core :refer :all]
   [clojure.java.io   :as io])
