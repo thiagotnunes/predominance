@@ -42,6 +42,14 @@ Currently, the following functions are supported.
 (color "/path/to/file.jpg" (trailing-pixels 10) (trailing-pixels 10)) ; => <#java.awt.Color>
 ```
 
+Tested against the following image formats:
+
+- JPEG
+- PNG
+- GIF
+- TIFF
+- BMP
+
 ## License
 
 (The MIT License)
