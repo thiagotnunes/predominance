@@ -12,7 +12,7 @@ Add this to your leiningen project.clj file:
 
 Currently, the following functions are supported.
 
-```clojure
+```
 (:require
   [predominance.core :refer :all]
   [clojure.java.io   :as io])
@@ -20,24 +20,26 @@ Currently, the following functions are supported.
 ; The whole image
 (color "/path/to/file.jpg") ; => <#java.awt.Color>
 
+; It also accepts files as input
+(color (as-file "/path/to/file.jpg")) ; => <#java.awt.Color>
+
+; For x and y coordinates one of the two functions should be used
+; (starting-pixels 10) ; => starts from the 10th pixel and goes up to width or height
+; (trailing-pixels 10) ; => starts from the width or height minus trailing-pixels and goes up to width or height
+
 ; From a given x
-; Starts at the position specified and goes up to the image's width
 (color-from-x "/path/to/file.jpg" (starting-pixels 10)) ; => <#java.awt.Color>
-; Starts at the position (- width trailing pixels) and goes up to the image's width
 (color-from-x "/path/to/file.jpg" (trailing-pixels 10)) ; => <#java.awt.Color>
 
 ; From a given y
-; Starts at the position specified and goes up to the image's height
 (color-from-y "/path/to/file.jpg" (starting-pixels 10)) ; => <#java.awt.Color>
-; Starts at the position (- height trailing pixels) and goes up to the image's height
 (color-from-y "/path/to/file.jpg" (trailing-pixels 10)) ; => <#java.awt.Color>
 
 ; From a given x and y
 (color "/path/to/file.jpg" (starting-pixels 0) (starting-pixels 10)) ; => <#java.awt.Color>
+(color "/path/to/file.jpg" (trailing-pixels 0) (starting-pixels 10)) ; => <#java.awt.Color>
+(color "/path/to/file.jpg" (starting-pixels 0) (trailing-pixels 10)) ; => <#java.awt.Color>
 (color "/path/to/file.jpg" (trailing-pixels 10) (trailing-pixels 10)) ; => <#java.awt.Color>
-
-; It also accepts files as input
-(color (as-file "/path/to/file.jpg")) ; => <#java.awt.Color>
 ```
 
 ## License
